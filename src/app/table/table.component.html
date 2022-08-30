@@ -112,9 +112,69 @@
 
 
 
+
+<!-- extra code -->
+<!-- 
+  <div class="container mt-5" >
+    <dx-data-grid [dataSource]="itemList" keyExpr="item" [showBorders]="true"
+    [showColumnLines]="true"
+    [showRowLines]="true"
+    (onCellPrepared)="onCellPrepared($event)"
+    >
+    
+    
+    <dxi-column type="selection" 
+    mode="multiple" showCheckBoxesMode="onClick" selectAllMode="allPages"> </dxi-column>
+    <dxo-selection
+    selectAllMode="allPages"
+    showCheckBoxesMode="onClick"
+    mode="multiple"
+    ></dxo-selection>
+    
+    <dxi-column cssClass="cell-heighlighted"  dataField="item" cellTemplate="cellTemplate" width="200" >
+      customize table data 
+      <div    style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellTemplate'">
+        <div  style="color:blue">{{cell.text}}</div>       
+        <div class="btn-container" style="position: relative;">
+          <button class="btn-o" > <i style="color: #bbbbbb;" class="fa-solid fa-circle-plus"></i> </button>
+        </div>
+      </div>
+    </dxi-column>
+    <dxi-column  dataField="status" cellTemplate="statusCellTemplate" width="100">
+        <div *dxTemplate="let cell of 'statusCellTemplate'">
+            <div style="width:100% ;height:100%;margin:0;" >{{cell.text}}</div>       
+            
+          </div>
+        </dxi-column>
+        <dxi-column dataField="date" width="100"></dxi-column>
+        
+        
+        <dxo-editing cssClass="edit"
+        mode="batch"
+        text="add a row"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        >
+      </dxo-editing>
+      <dxo-summary >
+        <dxi-total-item
+        name="SelectedRowsSummary"
+        summaryType="custom"
+        
+        column="item"
+        >
+        
+        
+      </dxi-total-item>
+      
+    </dxo-summary>
+  </dx-data-grid>
+<p class="extra">add row</p>
+</div> -->
 <!-- currency table  -->
 
-<div class="container">
+<!-- <div class="container">
   <dx-data-grid [showBorders]="true" [showColumnLines]="true" [showRowLines]="true" [dataSource]="currency">
     <dxi-column dataField="currency" cellTemplate="cellsTemplate" width="150">
       <div style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellsTemplate'">
@@ -155,71 +215,4 @@
       </div>
     </dxi-column>
   </dx-data-grid>
-</div>
-
-
-
-
-
-
-
-
-<!-- extra code -->
-<!-- 
-<div class="container mt-5" >
-    <dx-data-grid [dataSource]="itemList" keyExpr="item" [showBorders]="true"
-[showColumnLines]="true"
-  [showRowLines]="true"
-  (onCellPrepared)="onCellPrepared($event)"
-  >
-
-  
-    <dxi-column type="selection" 
-    mode="multiple" showCheckBoxesMode="onClick" selectAllMode="allPages"> </dxi-column>
-    <dxo-selection
-    selectAllMode="allPages"
-    showCheckBoxesMode="onClick"
-    mode="multiple"
-  ></dxo-selection>
-
-    <dxi-column cssClass="cell-heighlighted"  dataField="item" cellTemplate="cellTemplate" width="200" >
-        customize table data 
-        <div    style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellTemplate'">
-            <div  style="color:blue">{{cell.text}}</div>       
-            <div class="btn-container" style="position: relative;">
-                <button class="btn-o" > <i style="color: #bbbbbb;" class="fa-solid fa-circle-plus"></i> </button>
-            </div>
-        </div>
-    </dxi-column>
-    <dxi-column  dataField="status" cellTemplate="statusCellTemplate" width="100">
-        <div *dxTemplate="let cell of 'statusCellTemplate'">
-            <div style="width:100% ;height:100%;margin:0;" >{{cell.text}}</div>       
-            
-        </div>
-    </dxi-column>
-    <dxi-column dataField="date" width="100"></dxi-column>
-        
-    
-      <dxo-editing cssClass="edit"
-        mode="batch"
-        text="add a row"
-        [allowUpdating]="true"
-        [allowAdding]="true"
-        [allowDeleting]="true"
-        >
-    </dxo-editing>
-    <dxo-summary >
-      <dxi-total-item
-        name="SelectedRowsSummary"
-        summaryType="custom"
-        
-        column="item"
-      >
-      
-       
-      </dxi-total-item>
-      
-    </dxo-summary>
-</dx-data-grid>
-<p class="extra">add row</p>
 </div> -->
