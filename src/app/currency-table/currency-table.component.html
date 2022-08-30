@@ -1,0 +1,43 @@
+
+<div class="container mt-5">
+    <dx-data-grid [showBorders]="true" [showColumnLines]="true" [showRowLines]="true" [dataSource]="currency">
+      <dxi-column dataField="currency" cellTemplate="cellsTemplate" width="150">
+        <div style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellsTemplate'">
+          <div style="color:blue" >{{cell.text}}</div>
+        </div>
+      </dxi-column>
+      <dxi-column dataField="currentPrice" [width]="110" alignment="left" cellTemplate="newCurrency">
+        <div *dxTemplate="let cell of 'newCurrency'">
+          <div *ngIf="cell.key.currency == 'Indian'" >{{cell.value |
+            currency:'INR':'symbol-narrow':'2.2'}}</div>
+          <div *ngIf="cell.key.currency == 'Australian'" >{{cell.value |
+            currency:'AUD':'symbol':'2.2'}}</div>
+          <div *ngIf="cell.key.currency == 'United States'" >{{cell.value | currency:'USD'}}</div>
+          <div *ngIf="cell.key.currency == 'United Kingdom'" >{{cell.value | currency:'GBP'}}</div>
+          <div *ngIf="cell.key.currency == 'German'" >{{cell.value | currency:'EUR'}}</div>
+        </div>
+      </dxi-column>
+      <dxi-column dataField="lastPrice" [width]="110" alignment="left" cellTemplate="oldCurrency">
+        <div *dxTemplate="let cell of 'oldCurrency'">
+          <div *ngIf="cell.key.currency == 'Indian'" >{{cell.value |
+            currency:'INR':'symbol-narrow':'2.2'}}</div>
+          <div *ngIf="cell.key.currency == 'Australian'" >{{cell.value |
+            currency:'AUD':'symbol':'2.2'}}</div>
+          <div *ngIf="cell.key.currency == 'United States'" >{{cell.value | currency:'USD'}}</div>
+          <div *ngIf="cell.key.currency == 'United Kingdom'" (click)="onClick(cell)">{{cell.value | currency:'GBP'}}</div>
+          <div *ngIf="cell.key.currency == 'German'" (click)="onClick(cell)">{{ cell.value | currency:'EUR':true}}</div>
+        </div>
+      </dxi-column>
+      <dxi-column dataField="difference" [width]="110" cellTemplate="currencyDifference">
+        <div class="currency_cell" *dxTemplate="let cell of 'currencyDifference'">
+          <div *ngIf="cell.key.currentPrice - cell.key.lastPrice > 0 " >
+            <div><button style="color: green;"><i class="fa-solid fa-angle-up"></i></button></div>
+          </div>
+          <div *ngIf="cell.key.currentPrice - cell.key.lastPrice < 0 " >
+            <div><button><i style="color:red" class="fa-solid fa-angle-down"></i></button></div>
+          </div>
+          <div *ngIf="cell.key.currentPrice - cell.key.lastPrice == 0 " ><div>equal</div></div>
+        </div>
+      </dxi-column>
+    </dx-data-grid>
+  </div>

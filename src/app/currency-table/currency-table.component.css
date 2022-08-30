@@ -1,0 +1,8 @@
+.currency_cell div div{
+    width: 100%;text-align:center
+}
+.currency_cell div div button{
+background: transparent;
+border: none;
+outline: none;
+}

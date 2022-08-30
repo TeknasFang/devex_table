@@ -1,0 +1,225 @@
+<div *ngFor="let items of itemJson.projectGroup">
+  <div class="container mt-4">
+    <dx-data-grid [showBorders]="true" [showColumnLines]="true" [showRowLines]="true"
+      [dataSource]="items.projectGroupItems" editCellTemplate="tagBoxEditor">
+      <dxi-column cssClass="cell-heighlighted" dataField="name" cellTemplate="cellTemplate" width="150">
+        <div style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellTemplate'">
+          <div style="color:blue">{{cell.text}}</div>
+          <div class="btn-container" style="position: relative;">
+            <button class="btn-o"> <i style="color: #bbbbbb;" class="fa-solid fa-circle-plus"></i> </button>
+          </div>
+        </div>
+      </dxi-column>
+      <!-- <dxi-column [width]="120" dataField="status" cellTemplate="statusTemplate" headerCellTemplate="Status">
+      <div *dxTemplate="let info of 'Status'">
+       Status
+    </div>
+    <div style="position: relative;height: 20px;" *dxTemplate="let info of 'statusTemplate'">
+      <div *ngIf="info.text == 'Working on it'" ><div class="expandBg" style="background-color: #FDAB3D;"></div><p class="statusText" >{{info.text}}</p></div>
+      <div *ngIf="info.text == 'Done'"><div class="expandBg" style="background-color: #00C875;"></div><p class="statusText" >{{info.text}}</p></div>
+      <div  *ngIf="info.text == 'Paused'" ><div class="pausedLogoContainer"><div class="pausedLogo"></div></div></div>      
+      <div *ngIf="info.text == 'working on it'" ><div class="expandBg" style="background-color: #FDAB3D;"></div><p class="statusText" >{{info.text}}</p></div>
+      <div *ngIf="info.text == 'done'"><div class="expandBg" style="background-color: #00C875;"></div><p class="statusText" >{{info.text}}</p></div>
+      <div  *ngIf="info.text == 'paused'" ><div class="pausedLogoContainer"><div class="pausedLogo"></div></div></div> 
+      <div class="status_selection">
+        <button><i class="fa-solid fa-chevron-up"></i></button>
+      </div>     
+    </div>
+    </dxi-column>
+    <dxi-column dataField="targetDate" dataType="date" [width]="110">
+    </dxi-column> -->
+      <dxi-column dataField="status" width="150" cellTemplate="statusTemp" [editorOptions]="editorOptions">
+        <dxo-lookup width="100" [dataSource]="statuses" displayExpr="name" valueExpr="name">
+        </dxo-lookup>
+        <div *dxTemplate="let status of 'statusTemplate'">
+          <div *ngIf="status === null" ; else elseBlock>
+            <span>(All)</span>
+          </div>
+          <div dx-template #elseBlock>
+            <span class="middle">{{ status.name }}</span>
+          </div>
+        </div>
+        <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
+        <div style="position: relative;height: 20px" *dxTemplate="let status of 'statusTemp'">
+          <!-- <div dx-template >
+          <span class="middle" >{{ status.text}}</span>
+          <span class="middle" >{{ status.text}}</span>
+          <span class="middle" >{{ status.text}}</span>
+        </div> -->
+          <div *ngIf="status.text == 'Working on it'">
+            <div class="expandBg" style="background-color: #FDAB3D;"></div>
+            <p class="statusText">{{status.text}}</p>
+          </div>
+          <div *ngIf="status.text == 'Done'">
+            <div class="expandBg" style="background-color: #00C875;"></div>
+            <p class="statusText">{{status.text}}</p>
+          </div>
+          <div *ngIf="status.text == 'Paused'">
+            <div class="pausedLogoContainer">
+              <div class="pausedLogo"></div>
+            </div>
+          </div>
+        </div>
+      </dxi-column>
+
+      <dxi-column dataField="targetDate" dataType="date" [width]="110">
+      </dxi-column>
+      <dxo-editing cssClass="edit" mode="batch" text="add a row" [allowUpdating]="true" [allowAdding]="true"
+        [allowDeleting]="true">
+      </dxo-editing>
+      <dxo-summary>
+        <dxi-total-item name="SelectedRowsSummary" summaryType="custom" column="name">
+        </dxi-total-item>
+      </dxo-summary>
+    </dx-data-grid>
+    <p class="extra">add row</p>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <dx-button icon="plus" text=" Add Table" (onClick)="addNewTable()"></dx-button>
+</div>
+<div class="display_data">
+  <dx-button text="Show details" (onClick)="togglePopup()">
+  </dx-button>
+</div>
+<dx-popup [(visible)]="isPopupVisible" [hideOnOutsideClick]="true" [dragEnabled]="false" title="Project Details"
+  contentTemplate="popup-content" [height]="600" [width]="450" [resizeEnabled]="true">
+
+  <div *dxTemplate="let data of 'popup-content'">
+    <dx-scroll-view width="100%" height="100%">
+      <p>Project name : {{itemJson.name}}</p>
+      <p>Assigned user name : {{itemJson.assignedUserName}}</p>
+      <p>Assigned user id : {{itemJson.assignedUserId}}</p>
+      <p>Project status : {{itemJson.status}}</p>
+      <p>Project group data : </p>
+      <div class="group" style="margin-bottom:.8rem ;" *ngFor="let group of itemJson.projectGroup">
+        <div>
+          <p>Group name : {{group.name}}</p>
+          <p>Group items : </p>
+          <div class="group-item" *ngFor="let item of group.projectGroupItems">
+            <div>
+              <p>Item name : {{item.name}}</p>
+              <p>Item status : {{item.status}}</p>
+              <p>Item target-date : {{item.targetDate |date}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dx-scroll-view>
+  </div>
+</dx-popup>
+
+
+
+<!-- currency table  -->
+
+<div class="container">
+  <dx-data-grid [showBorders]="true" [showColumnLines]="true" [showRowLines]="true" [dataSource]="currency">
+    <dxi-column dataField="currency" cellTemplate="cellsTemplate" width="150">
+      <div style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellsTemplate'">
+        <div style="color:blue" (click)="onClick(cell)">{{cell.text}}</div>
+      </div>
+    </dxi-column>
+    <dxi-column dataField="currentPrice" [width]="110" alignment="left" cellTemplate="newCurrency">
+      <div *dxTemplate="let cell of 'newCurrency'">
+        <div *ngIf="cell.key.currency == 'Indian'" (click)="onClick(cell)">{{cell.value |
+          currency:'INR':'symbol-narrow':'2.2'}}</div>
+        <div *ngIf="cell.key.currency == 'Australian'" (click)="onClick(cell)">{{cell.value |
+          currency:'AUD':'symbol':'2.2'}}</div>
+        <div *ngIf="cell.key.currency == 'United States'" (click)="onClick(cell)">{{cell.value | currency:'USD'}}</div>
+        <div *ngIf="cell.key.currency == 'United Kingdom'" (click)="onClick(cell)">{{cell.value | currency:'GBP'}}</div>
+        <div *ngIf="cell.key.currency == 'German'" (click)="onClick(cell)">{{cell.value | currency:'EUR'}}</div>
+      </div>
+    </dxi-column>
+    <dxi-column dataField="lastPrice" [width]="110" alignment="left" cellTemplate="oldCurrency">
+      <div *dxTemplate="let cell of 'oldCurrency'">
+        <div *ngIf="cell.key.currency == 'Indian'" (click)="onClick(cell)">{{cell.value |
+          currency:'INR':'symbol-narrow':'2.2'}}</div>
+        <div *ngIf="cell.key.currency == 'Australian'" (click)="onClick(cell)">{{cell.value |
+          currency:'AUD':'symbol':'2.2'}}</div>
+        <div *ngIf="cell.key.currency == 'United States'" (click)="onClick(cell)">{{cell.value | currency:'USD'}}</div>
+        <div *ngIf="cell.key.currency == 'United Kingdom'" (click)="onClick(cell)">{{cell.value | currency:'GBP'}}</div>
+        <div *ngIf="cell.key.currency == 'German'" (click)="onClick(cell)">{{cell.value | currency:'EUR'}}</div>
+      </div>
+    </dxi-column>
+    <dxi-column dataField="difference" [width]="110" cellTemplate="currencyDifference">
+      <div class="currency_cell" *dxTemplate="let cell of 'currencyDifference'">
+        <div *ngIf="cell.key.currentPrice - cell.key.lastPrice > 0 " (click)="onClick(cell)">
+          <div><button style="color: green;"><i class="fa-solid fa-angle-up"></i></button></div>
+        </div>
+        <div *ngIf="cell.key.currentPrice - cell.key.lastPrice < 0 " (click)="onClick(cell)">
+          <div><button><i style="color:red" class="fa-solid fa-angle-down"></i></button></div>
+        </div>
+        <div *ngIf="cell.key.currentPrice - cell.key.lastPrice == 0 " (click)="onClick(cell)">equal</div>
+      </div>
+    </dxi-column>
+  </dx-data-grid>
+</div>
+
+
+
+
+
+
+
+
+<!-- extra code -->
+<!-- 
+<div class="container mt-5" >
+    <dx-data-grid [dataSource]="itemList" keyExpr="item" [showBorders]="true"
+[showColumnLines]="true"
+  [showRowLines]="true"
+  (onCellPrepared)="onCellPrepared($event)"
+  >
+
+  
+    <dxi-column type="selection" 
+    mode="multiple" showCheckBoxesMode="onClick" selectAllMode="allPages"> </dxi-column>
+    <dxo-selection
+    selectAllMode="allPages"
+    showCheckBoxesMode="onClick"
+    mode="multiple"
+  ></dxo-selection>
+
+    <dxi-column cssClass="cell-heighlighted"  dataField="item" cellTemplate="cellTemplate" width="200" >
+        customize table data 
+        <div    style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellTemplate'">
+            <div  style="color:blue">{{cell.text}}</div>       
+            <div class="btn-container" style="position: relative;">
+                <button class="btn-o" > <i style="color: #bbbbbb;" class="fa-solid fa-circle-plus"></i> </button>
+            </div>
+        </div>
+    </dxi-column>
+    <dxi-column  dataField="status" cellTemplate="statusCellTemplate" width="100">
+        <div *dxTemplate="let cell of 'statusCellTemplate'">
+            <div style="width:100% ;height:100%;margin:0;" >{{cell.text}}</div>       
+            
+        </div>
+    </dxi-column>
+    <dxi-column dataField="date" width="100"></dxi-column>
+        
+    
+      <dxo-editing cssClass="edit"
+        mode="batch"
+        text="add a row"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true"
+        >
+    </dxo-editing>
+    <dxo-summary >
+      <dxi-total-item
+        name="SelectedRowsSummary"
+        summaryType="custom"
+        
+        column="item"
+      >
+      
+       
+      </dxi-total-item>
+      
+    </dxo-summary>
+</dx-data-grid>
+<p class="extra">add row</p>
+</div> -->

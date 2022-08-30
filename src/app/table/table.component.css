@@ -1,0 +1,149 @@
+
+
+.container{
+    position: relative;
+   
+}
+.extra {
+    position: absolute;
+    bottom: 0;
+    left: 4.1rem;
+}
+button.bbutton{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+::ng-deep .dx-toolbar-item:nth-of-type(1){
+    position: relative;
+    left:-8px;
+}
+::ng-deep .dx-toolbar-item:nth-of-type(2),::ng-deep .dx-toolbar-item:nth-of-type(3){
+    position: relative;
+    left: 23.3rem;
+}
+ /* ::ng-deep .dx-toolbar-item:nth-of-type(3){
+    position: relative;
+    left: 22.5rem;
+}  */
+::ng-deep .dx-toolbar-after{
+    left: 0px;
+    bottom: 0;
+    z-index: 10;
+}
+::ng-deep .dx-toolbar-items-container{
+    position: absolute;
+    bottom: 7px;
+}
+button.btn-o{
+    position:absolute;
+    background-color: transparent;
+    outline: none;
+    font-size: 20px;
+    border: 0;
+    margin: 0;
+    padding: 10px;
+    top: -15px;
+    left: -35px;
+    border-left: 1px solid #dddddd;
+    
+}
+.cell-highlighted {
+    background-color: #f01212;
+}
+::ng-deep .dx-data-row .cell-highlighted {
+    background-color: #af5959;
+}
+ 
+::ng-deep .dx-header-row .cell-highlighted {
+    color: gray;
+    font-style: italic;
+}
+.adaptiveRowStyle { 
+    background-color: #cce6ff;
+    font-size: 12pt
+}
+::ng-deep .edit{
+    position: absolute;
+    bottom: 0;
+}
+::ng-deep .dx-datagrid-total-footer{
+    padding: 10px;
+}
+
+::ng-deep .expandBg{
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 220px;
+    height: 120px;
+    
+}
+::ng-deep .statusText{
+    z-index:10;
+    position: absolute;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+::ng-deep .pausedLogoContainer{
+    display:flex ;align-items:center;justify-content:center
+}
+::ng-deep .pausedLogo{
+    width: 20px;
+    height: 20px;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoxdBshhqRiQQ2mAvd0g-ppOfDJ-wuqLkC1yqyG63-OV7-wUAsZK4LEPe30qxdwYiI6vc&usqp=CAU');
+    background-size: cover;
+}
+.status_selection{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+}
+.display_data{
+    position: absolute;
+    top: 5.5rem;
+    right: 10rem;
+}
+
+::ng-deep .dx-popup-title.dx-toolbar{
+    padding: 24px 20px;
+}
+::ng-deep .dx-popup-normal.dx-toolbar.dx-toolbar-items-container{
+    position:relative;
+    width: 100%;
+}
+::ng-deep .dx-popup-title.dx-toolbar-items-container.dx-toolbar-before{
+    position: absolute;
+    left: 0;
+}
+::ng-deep .dx-popup-normal.dx-toolbar.dx-toolbar-items-container.dx-toolbar-center{
+    position: absolute;
+    left: 0;
+}
+::ng-deep .dx-popup-title .dx-toolbar-after{
+
+    position: absolute;
+    left: auto;
+    right: 2rem;
+} 
+
+.group, .group-item{
+    border:0.5px solid rgb(203, 203, 203);
+    border-radius: 4px;
+    padding: 0.4rem;
+}
+.group-item{
+    margin-bottom: 0.4rem;
+}
+
+.currency_cell div div{
+    width: 100%;text-align:center
+}
+.currency_cell div div button{
+background: transparent;
+border: none;
+outline: none;
+}

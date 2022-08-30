@@ -1,0 +1,44 @@
+<div class="form-container">
+    <div class="login-box">
+        <h2>form </h2>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+          <div class="user-box">
+              <input name="uname" ngModel type="text" pattern="[a-zA-Z]*" required #uname="ngModel" >
+              <label class="mb-0">Username</label>
+              <!-- <span *ngIf="uname.invalid && uname.touched" class="err-msg">* username is required</span> -->
+              <span class="err-msg" *ngIf="uname.errors">
+                <span *ngIf="uname.touched && uname.errors['required']">* username is required </span>
+                <span *ngIf="uname.errors['pattern']">* only alphabets are allowed </span>
+            </span>   
+          </div>
+          <div class="user-box mt-3">
+            <input type="password" name="password" required ngModel #password="ngModel">
+            <label>Password</label>
+            <span *ngIf="password.touched && password.invalid"  class="err-msg">* password is required</span>
+          </div>
+          <div class="user-box mt-3">
+            <input type="text" name="contact" ngModel required minlength="10" #contact="ngModel">
+            <label>Contact</label>
+            <span class="err-msg" *ngIf="contact.errors">
+                <span *ngIf="contact.touched && contact.errors['required']">* Contact is required</span>
+                <span *ngIf="contact.errors['minlength']">* Minimum length should be 10digits </span>
+            </span>
+
+            
+          </div>
+          <div class="user-box mt-3">
+            <input type="text" name="adress" required ngModel>
+            <label>Adress</label>
+            
+          </div>
+          <a (click)="onSubmit(form)">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <b style="font-weight: 400;">Submit</b>
+          </a>
+        </form>
+      </div>
+    
+</div>
