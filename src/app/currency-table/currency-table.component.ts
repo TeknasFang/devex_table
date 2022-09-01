@@ -9,6 +9,11 @@ export class CurrencyTableComponent implements OnInit {
   onClick(data:any){
     console.log(data)
   }
+  editorOptions!:any;
+  currencyStatus = [
+    'Indian','Australian','United States','United Kingdom','German'
+  ];
+
  currency = [
     {
       currency: 'Indian',
@@ -36,14 +41,14 @@ export class CurrencyTableComponent implements OnInit {
     },
     {
       currency: 'German',
-      newCurrency: 2,
-      oldCurrency: 20,
+      currentPrice: 2,
+      lastPrice: 20,
       difference: 'positive or negative',
     }
   ];
-  constructor() { }
+  
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

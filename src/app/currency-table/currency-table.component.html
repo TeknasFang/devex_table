@@ -1,9 +1,14 @@
 
 <div class="container mt-5">
     <dx-data-grid [showBorders]="true" [showColumnLines]="true" [showRowLines]="true" [dataSource]="currency">
+      <dxi-column cellTemplate="cellssTemplate" width="35">
+        <div *dxTemplate="let cell of 'cellssTemplate'">
+          <div style="color:blue;text-align: center;" >{{cell.rowIndex + 1}}</div>
+        </div>
+      </dxi-column>
       <dxi-column dataField="currency" cellTemplate="cellsTemplate" width="150">
         <div style="display: flex;justify-content:space-between;" *dxTemplate="let cell of 'cellsTemplate'">
-          <div style="color:blue" >{{cell.text}}</div>
+          <div >{{cell.text}}</div>
         </div>
       </dxi-column>
       <dxi-column dataField="currentPrice" [width]="110" alignment="left" cellTemplate="newCurrency">
@@ -39,5 +44,29 @@
           <div *ngIf="cell.key.currentPrice - cell.key.lastPrice == 0 " ><div>equal</div></div>
         </div>
       </dxi-column>
+      <dxo-editing
+        [allowUpdating]="true"
+        [allowAdding]="false"
+        [allowDeleting]="true"
+        [confirmDelete]="false"
+        [useIcons]="true"
+        mode="popup"> <!-- 'batch' | 'cell' | 'form' | 'popup' -->
+        <dxo-popup
+        title="currency Info"
+        [showTitle]="true"
+        [width]="700"
+        [height]="525"
+      >
+      </dxo-popup>
+      <dxo-form>
+        <dxi-item itemType="group" [colCount]="1" [colSpan]="2">
+          <dxi-item dataField="currency" editorType="dxSelectBox"
+          [editorOptions]="{ items: currencyStatus, searchEnabled: true, value: '' }">
+          </dxi-item>
+          <dxi-item dataField="currentPrice"></dxi-item>
+          <dxi-item dataField="lastPrice"></dxi-item>
+        </dxi-item>
+      </dxo-form>
+    </dxo-editing>
     </dx-data-grid>
   </div>
